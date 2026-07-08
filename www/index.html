@@ -81,7 +81,7 @@ simp_.addEventListener('click',function(){sfi_.click()});
 sfi_.addEventListener('change',importBooks);
 bsv_.addEventListener('click',saveBook);
 bex_.addEventListener('click',exportBooks);
-bcl_.addEventListener('click',backToShelf);var bgc_=Q('bgc');bgc_.addEventListener('input',function(){document.body.style.background=bgc_.value;localStorage.setItem('flip-bg',bgc_.value)});var savedBg=localStorage.getItem('flip-bg');if(savedBg){document.body.style.background=savedBg;bgc_.value=savedBg}bpic_.addEventListener('click',function(){fi_.click()});fi_.addEventListener('change',function(){var f=Array.from(fi_.files);imp(f);fi_.value=''});
+bcl_.addEventListener('click',backToShelf);var bgc_=Q('bgc');bgc_.addEventListener('input',function(){document.body.style.background=bgc_.value;localStorage.setItem('flip-bg',bgc_.value)});var savedBg=localStorage.getItem('flip-bg');if(savedBg){document.body.style.background=savedBg;bgc_.value=savedBg}bpic_.addEventListener('click',function(){if(window.Capacitor&&window.Capacitor.Plugins&&window.Capacitor.Plugins.Camera){window.Capacitor.Plugins.Camera.pickImages({quality:90}).then(function(r){if(r&&r.photos){var ps=r.photos;var files=[];var done=0;function chk(){done++;if(done===ps.length)imp(files)}for(var i=0;i<ps.length;i++){(function(p){fetch(p.webPath).then(function(r2){return r2.blob()}).then(function(b){files.push(new File([b],'p'+i+'.jpg'));chk()})})(ps[i])}}}).catch(function(){fi_.click()})}else{fi_.click()}});fi_.addEventListener('change',function(){var f=Array.from(fi_.files);imp(f);fi_.value=''});
 window.addEventListener('keydown',hk);
 window.addEventListener('resize',function(){if(bw_.style.display!=='none')rs()});
 async function init(){rs();await showShelf()}
